@@ -1,0 +1,26 @@
+{% extends "products/base.html" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<a class="back" href="{% url 'products:list' %}">&larr; Back to products</a>
+
+<article class="detail">
+  {% if product.image %}
+    <img class="detail-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+  {% endif %}
+  <div class="detail-info">
+    <h1>{{ product.name }}</h1>
+    <p class="price price-large" data-price="{{ product.price|stringformat:"s" }}">₦{{ product.price }}</p>
+    <p class="description">{{ product.description|linebreaksbr }}</p>
+    <p class="meta">
+      Created {{ product.created_at|date:"M d, Y H:i" }}<br>
+      Updated {{ product.updated_at|date:"M d, Y H:i" }}
+    </p>
+    <div class="actions">
+      <a class="btn" href="{% url 'products:update' product.id %}">Edit</a>
+      <a class="btn btn-danger" href="{% url 'products:delete' product.id %}">Delete</a>
+    </div>
+  </div>
+</article>
+{% endblock %}

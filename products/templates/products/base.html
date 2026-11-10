@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Products{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a class="brand" href="{% url 'products:list' %}">Product Manager</a>
+      <nav>
+        <a href="{% url 'products:list' %}">All products</a>
+        <a class="btn btn-small" href="{% url 'products:create' %}">+ Add product</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="{% static 'products/js/main.js' %}"></script>
+</body>
+</html>

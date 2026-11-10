@@ -1,0 +1,28 @@
+{% extends "products/base.html" %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h1 class="page-title">Products</h1>
+
+{% if products %}
+  <div class="grid">
+    {% for product in products %}
+      <a class="card" href="{% url 'products:detail' product.id %}">
+        {% if product.image %}
+          <img class="card-img" src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h2 class="card-title">{{ product.name }}</h2>
+          <p class="price" data-price="{{ product.price|stringformat:"s" }}">₦{{ product.price }}</p>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty">
+    <p>No products yet.</p>
+    <a class="btn" href="{% url 'products:create' %}">Add your first product</a>
+  </div>
+{% endif %}
+{% endblock %}
